@@ -4,20 +4,22 @@
 .DEFAULT_GOAL := run
 
 SHELL = /bin/bash
+
 DOCKER_RUN = docker run --rm -it
+KCONFIG=-v ./config:/linux/config:rw
 
 build:
 	docker build -t xm .
 
 run: build
-	docker run --rm -it -v ./assets/:/assets/ -v ./.config:/linux/.config xm:latest
+	$(DOCKER_RUN) -v ./assets/:/assets/ $(KCONFIG) xm:latest
 
 clean:
 	rm -rf assets/*
 	touch assets/.gitkeep
 
-#oldconfig: build
-#	$(DOCKER_RUN) -v ./.config:/linux/.config:rw xm:latest make -j16 oldconfig
+oldconfig: build
+	$(DOCKER_RUN) $(KCONFIG) xm:latest make -j16 oldconfig
 
-#menuconfig: build
-#	$(DOCKER_RUN) -v ./.config:/linux/.config:rw xm:latest make -j16 menuconfig
+menuconfig: build
+	$(DOCKER_RUN) $(KCONFIG) xm:latest make -j16 menuconfig
