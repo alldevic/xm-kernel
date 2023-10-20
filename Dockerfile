@@ -17,9 +17,6 @@ RUN git clone --depth 1 --branch 6.5.7-xanmod1 \
 
 WORKDIR linux
 
-RUN rm localversion; \
-    echo 'xm4' | tee localversion
-
-ENV KCONFIG_CONFIG=CONFIGS/xanmod/gcc/config_x86-64-v4
+COPY localversion /linux/localversion
 	
 CMD make -j24 CC='gcc-13' HOSTCC='gcc-13' KDEB_PKGVERSION='1' bindeb-pkg; cp ../linux* /assets/
