@@ -21,4 +21,4 @@ RUN rm localversion
 
 ENV KCONFIG_CONFIG=/linux/config/.config
 	
-CMD make -j24 CC=gcc-13 HOSTCC=gcc-13 KDEB_PKGVERSION=1 LOCALVERSION=-xm bindeb-pkg; cp ../linux-* /assets/
+CMD make -j24 CC=gcc-13 HOSTCC=gcc-13 KDEB_PKGVERSION=3 LOCALVERSION=-xm bindeb-pkg; cp ../linux-* /assets/
