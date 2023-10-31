@@ -12,7 +12,7 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/frd-archive-keyring.gpg] https://do
 
 RUN apt update; apt install -y gcc-13
 
-RUN git clone --depth 1 --branch 6.5.8-xanmod1 \
+RUN git clone --depth 1 --branch 6.5.9-xanmod1 \
     https://github.com/xanmod/linux
 
 WORKDIR linux
@@ -21,4 +21,4 @@ RUN rm localversion
 
 ENV KCONFIG_CONFIG=/linux/config/.config
 	
-CMD make -j24 CC=gcc-13 HOSTCC=gcc-13 KDEB_PKGVERSION=5 LOCALVERSION=-xm bindeb-pkg; cp ../linux-* /assets/
+CMD make -j32 CC=gcc-13 HOSTCC=gcc-13 KDEB_PKGVERSION=1 LOCALVERSION=-xm bindeb-pkg; cp ../linux-* /assets/
