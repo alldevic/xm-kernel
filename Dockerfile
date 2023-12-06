@@ -12,7 +12,7 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/frd-archive-keyring.gpg] https://do
 
 RUN apt update; apt install -y gcc-13
 
-RUN git clone --depth 1 --branch 6.6.3-xanmod1 \
+RUN git clone --depth 1 --branch 6.6.4-xanmod1 \
     https://github.com/xanmod/linux
 
 WORKDIR linux
