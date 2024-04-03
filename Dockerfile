@@ -1,6 +1,6 @@
 FROM amd64/debian:bookworm-slim
 
-RUN apt update; apt install -y --no-install-recommends gpg rsync debhelper bc \
+RUN apt-get update; apt-get install -y --no-install-recommends gpg rsync debhelper bc \
     fakeroot build-essential git wget openssl libssl-dev cpio libelf-dev kmod \
     ca-certificates libncurses-dev zstd xz-utils flex python3 bison pahole 
 
@@ -10,9 +10,9 @@ RUN wget -qO - https://download.opensuse.org/repositories/home:/frd/Debian_12/Re
 RUN echo 'deb [signed-by=/usr/share/keyrings/frd-archive-keyring.gpg] https://download.opensuse.org/repositories/home:/frd/Debian_12/ /' | \
     tee /etc/apt/sources.list.d/frd-release.list
 
-RUN apt update; apt install -y gcc-13
+RUN apt-get update; apt-get install -y gcc-13
 
-RUN git clone --depth 1 --branch 6.8.1-xanmod1 \
+RUN git clone --depth 1 --branch 6.8.2-xanmod1 \
     https://github.com/xanmod/linux
 
 WORKDIR linux
