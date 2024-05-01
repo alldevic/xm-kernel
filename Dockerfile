@@ -7,7 +7,7 @@ RUN apt-get update; apt-get install -y --no-install-recommends gpg rsync debhelp
 RUN wget -qO - https://download.opensuse.org/repositories/home:/frd/Debian_12/Release.key | \
     gpg --dearmor -o /usr/share/keyrings/frd-archive-keyring.gpg
 
-RUN git clone --depth 1 --branch 6.8.7-xanmod1 \
+RUN git clone --depth 1 --branch 6.8.8-xanmod1 \
     https://github.com/xanmod/linux
 
 WORKDIR linux
