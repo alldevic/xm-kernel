@@ -1,4 +1,4 @@
-FROM amd64/debian:trixie-slim
+FROM debian:trixie-20240722-slim
 
 RUN apt-get update; apt-get install -y --no-install-recommends gpg rsync debhelper bc \
     fakeroot build-essential git wget openssl libssl-dev cpio libelf-dev kmod \
@@ -7,7 +7,7 @@ RUN apt-get update; apt-get install -y --no-install-recommends gpg rsync debhelp
 RUN wget -qO - https://download.opensuse.org/repositories/home:/frd/Debian_12/Release.key | \
     gpg --dearmor -o /usr/share/keyrings/frd-archive-keyring.gpg
 
-RUN git clone --depth 1 --branch 6.10.0-xanmod1 \
+RUN git clone --depth 1 --branch 6.10.2-xanmod1 \
     https://github.com/xanmod/linux
 
 WORKDIR linux
