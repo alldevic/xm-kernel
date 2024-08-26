@@ -6,20 +6,20 @@
 SHELL = /bin/bash
 
 DOCKER_RUN = docker run --rm -it
-KCONFIG=-v ./config:/linux/config:rw
+KCONFIG=-v ./config:/kernel/linux/config:rw
 
 build:
-	docker build -t xm .
+	time docker build -t xm .
 
 run: build
-	$(DOCKER_RUN) -v ./assets/:/assets/ $(KCONFIG) xm:latest
+	time $(DOCKER_RUN) -v ./assets/:/kernel/assets/ $(KCONFIG) xm:latest
 
 clean:
 	rm -rf assets/*
 	touch assets/.gitkeep
 
 oldconfig: build
-	$(DOCKER_RUN) $(KCONFIG) xm:latest make -j16 oldconfig
+	time $(DOCKER_RUN) $(KCONFIG) xm:latest make -j16 oldconfig
 
 menuconfig: build
 	$(DOCKER_RUN) $(KCONFIG) xm:latest make -j16 menuconfig

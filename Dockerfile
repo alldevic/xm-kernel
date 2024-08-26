@@ -1,19 +1,29 @@
-FROM debian:trixie-20240722-slim
+FROM debian:trixie-20240812-slim
 
-RUN apt-get update; apt-get install -y --no-install-recommends gpg rsync debhelper bc \
-    fakeroot build-essential git wget openssl libssl-dev cpio libelf-dev kmod \
-    ca-certificates libncurses-dev zstd xz-utils flex python3 bison pahole 
+RUN apt-get update; \
+    apt-get install -y --no-install-recommends gpg rsync debhelper bc kmod \
+    fakeroot build-essential git wget openssl libssl-dev cpio libelf-dev \
+    ca-certificates libncurses-dev zstd xz-utils flex python3 bison pahole
 
-RUN wget -qO - https://download.opensuse.org/repositories/home:/frd/Debian_12/Release.key | \
-    gpg --dearmor -o /usr/share/keyrings/frd-archive-keyring.gpg
+WORKDIR /kernel/
 
-RUN git clone --depth 1 --branch 6.10.2-xanmod1 \
+ADD ./patches /kernel/patches
+   
+RUN git clone --depth 1 --branch 6.10.6-xanmod1 \
     https://github.com/xanmod/linux
+    
+WORKDIR /kernel/linux
 
-WORKDIR linux
+RUN for i in /kernel/patches/*.patch; do patch -p1 < $i; done
 
 RUN rm localversion
 
-ENV KCONFIG_CONFIG=/linux/config/.config
-	
-CMD make -j32 CC=gcc-13 HOSTCC=gcc-13 KDEB_PKGVERSION=1 LOCALVERSION=-xm bindeb-pkg; cp ../linux-* /assets/
+ENV KCONFIG_CONFIG=/kernel/linux/config/.config \
+    CC=gcc-14 \
+	HOSTCC=gcc-14 \
+    LOCALVERSION=-xm \
+    KDEB_PKGVERSION=1
+
+ADD ./make-bindeb-pkg.sh .
+
+CMD ["./make-bindeb-pkg.sh"]
