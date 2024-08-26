@@ -7,22 +7,18 @@ RUN apt-get update; \
 
 WORKDIR /kernel/
 
-ADD ./patches /kernel/patches
-   
 RUN git clone --depth 1 --branch 6.10.6-xanmod1 \
-    https://github.com/xanmod/linux
-    
+https://github.com/xanmod/linux
+
 WORKDIR /kernel/linux
 
+ADD ./patches /kernel/patches
 RUN for i in /kernel/patches/*.patch; do patch -p1 < $i; done
-
-RUN rm localversion
 
 ENV KCONFIG_CONFIG=/kernel/linux/config/.config \
     CC=gcc-14 \
 	HOSTCC=gcc-14 \
-    LOCALVERSION=-xm \
-    KDEB_PKGVERSION=1
+    LOCALVERSION=-xm
 
 ADD ./make-bindeb-pkg.sh .
 

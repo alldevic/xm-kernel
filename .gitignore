@@ -1,4 +1,6 @@
 assets/*
 config/.config.old
 
+KDEB_PKGVERSION
+
 !.gitkeep

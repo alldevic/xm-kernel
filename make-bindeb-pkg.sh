@@ -1,4 +1,4 @@
 #! /bin/bash
 
-make -j32 bindeb-pkg
+make -j`nproc` bindeb-pkg
 cp ../linux-* /kernel/assets/

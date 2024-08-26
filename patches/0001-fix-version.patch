@@ -1,0 +1,32 @@
+From 2f0ecd910e402099e901e5be4a49775f7831ab9d Mon Sep 17 00:00:00 2001
+From: Nikolay Bely <belyynikolay@gmail.com>
+Date: Tue, 27 Aug 2024 06:27:01 +0700
+Subject: [PATCH] fix version
+
+---
+ localversion             | 1 -
+ scripts/package/mkdebian | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/localversion b/localversion
+index c21af2f75ee0..e69de29bb2d1 100644
+--- a/localversion
++++ b/localversion
+@@ -1 +0,0 @@
+--xanmod1
+diff --git a/scripts/package/mkdebian b/scripts/package/mkdebian
+index 070149c985fe..4bb292ef9464 100755
+--- a/scripts/package/mkdebian
++++ b/scripts/package/mkdebian
+@@ -150,7 +150,7 @@ version=$KERNELRELEASE
+ if [ -n "$KDEB_PKGVERSION" ]; then
+ 	packageversion=$KDEB_PKGVERSION
+ else
+-	packageversion=$(${srctree}/scripts/setlocalversion --no-local ${srctree})-$($srctree/init/build-version)
++	packageversion=$($srctree/init/build-version)
+ fi
+ sourcename=${KDEB_SOURCENAME:-linux-upstream}
+ 
+-- 
+2.39.2
+

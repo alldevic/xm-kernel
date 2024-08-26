@@ -1,6 +1,0 @@
--j as arg
-KDEB_PKGVERSION as arg (mb mount .version)
-
---------------
-make deb-pkg LOCALVERSION=-falcot KDEB_PKGVERSION=$(make kernelversion)-1
-https://www.debian.org/doc//manuals/debian-handbook/sect.kernel-compilation.pl.html
