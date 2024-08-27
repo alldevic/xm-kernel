@@ -1,6 +1,6 @@
 #!/usr/bin/make
 
-.PHONY: build run clean oldconfig menuconfig
+.PHONY: build run clean oldconfig menuconfig sh patch_config
 .DEFAULT_GOAL := run
 
 SHELL = /bin/bash
@@ -11,7 +11,7 @@ ASSETS=-v ./assets/:/kernel/assets/
 KCONFIG=-v ./config:/kernel/linux/config:rw
 PKGVERSION= -v ./KDEB_PKGVERSION:/kernel/linux/.version:rw
 
-BASE_CMD=$(DOCKER_RUN) $(KCONFIG) $(PKGVERSION) 
+BASE_CMD=$(DOCKER_RUN) $(KCONFIG) $(PKGVERSION)
 
 build:
 	touch KDEB_PKGVERSION
@@ -29,3 +29,9 @@ oldconfig: build
 
 menuconfig: build
 	$(BASE_CMD) xm:latest make menuconfig
+
+sh:
+	 $(BASE_CMD) xm:latest bash
+
+patch_config: oldconfig
+	 $(BASE_CMD) xm:latest ./patch_config.sh

@@ -20,6 +20,6 @@ ENV KCONFIG_CONFIG=/kernel/linux/config/.config \
 	HOSTCC=gcc-14 \
     LOCALVERSION=-xm
 
-ADD ./make-bindeb-pkg.sh .
+ADD ./scripts/* .
 
 CMD ["./make-bindeb-pkg.sh"]
