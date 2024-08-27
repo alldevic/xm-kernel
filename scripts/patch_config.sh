@@ -29,3 +29,7 @@ echo "DONE!"
 # ../scripts/config --disable  MODULE_COMPRESS_ZSTD
 # ../scripts/config --enable   MODULE_COMPRESS_NONE
 # echo "DONE!"
+
+echo -n "Fix boot IMA warning..."
+../scripts/config --enable    CONFIG_IMA_DISABLE_HTABLE
+echo "DONE!"
