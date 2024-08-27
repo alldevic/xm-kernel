@@ -13,3 +13,7 @@ echo -n "Disabling debug..."
 ../scripts/config --set-val  DEBUG_INFO_DWARF5     n
 ../scripts/config --disable  DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT
 echo "DONE!"
+
+echo -n "Remove kernel/kheaders.ko"
+../scripts/config --undefine CONFIG_IKHEADERS
+echo "DONE!"
