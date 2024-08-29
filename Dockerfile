@@ -18,7 +18,7 @@ RUN for i in /kernel/patches/*.patch; do patch -p1 < $i; done
 ENV KCONFIG_CONFIG=/kernel/linux/config/.config \
     CC=gcc-14 \
 	HOSTCC=gcc-14 \
-    LOCALVERSION=-xm
+    LOCALVERSION=-xmd1
 
 ADD ./scripts/* .
 
