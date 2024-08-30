@@ -7,7 +7,7 @@ RUN apt-get update; \
 
 WORKDIR /kernel/
 
-RUN git clone --depth 1 --branch 6.10.6-xanmod1 \
+RUN git clone --depth 1 --branch 6.10.7-xanmod1 \
 https://github.com/xanmod/linux
 
 WORKDIR /kernel/linux
