@@ -31,8 +31,8 @@ menuconfig: build
 	$(BASE_CMD) xm:latest make menuconfig
 
 sh:
-	 $(BASE_CMD) xm:latest bash
-# Double for fix line ordering
-patch_config: oldconfig
-	 $(BASE_CMD) xm:latest ./patch_config.sh 
-	 $(BASE_CMD) xm:latest ./patch_config.sh
+	$(BASE_CMD) xm:latest bash
+
+patch_config:
+	$(BASE_CMD) xm:latest ./patch_config.sh 
+	$(MAKE) oldconfig
